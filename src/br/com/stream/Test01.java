@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TestHackerRank01 {
+public class Test01 {
 
     public static void main(String[] args) {
         //existeNoArray(1);

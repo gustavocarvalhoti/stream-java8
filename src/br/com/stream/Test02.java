@@ -1,6 +1,6 @@
 package br.com.stream;
 
-public class TestHackerRank02 {
+public class Test02 {
     // Driver method to test the above function
     public synchronized static void main(String[] args) {
         int arr[] = new int[]{4, 4, 2, 1, 3};

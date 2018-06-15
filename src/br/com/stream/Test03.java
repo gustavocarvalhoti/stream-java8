@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class TestHackerRank03 {
+public class Test03 {
 
     public static void main(String[] args) {
         //int[] numbers = new int[]{4, 2, 1, 3};
