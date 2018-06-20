@@ -1,2 +1,2 @@
 # Stream
-Using Stream Java8
+Using Stream Java8 + Intellij
