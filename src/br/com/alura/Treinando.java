@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Treinando {
@@ -21,14 +24,60 @@ public class Treinando {
     //test02();
     //orderByLength();
     ordernarListas();
+    //findAny();
+    //collect();
   }
 
-  private static void ordernarListas() {
+  private static void collect() {
+    List<Curso> cursos = getCursos();
+
+    System.out.println("*************************************************************************************");
+    List<Curso> resultados = cursos.stream().filter(c -> c.getAlunos() > 100).collect(Collectors.toList());
+    resultados.stream().forEach(c -> System.out.println(c.getNome()));
+
+    // Map
+    System.out.println("*************************************************************************************");
+    // toMap(c -> c.getNome(), c -> c.getAlunos()) - Key and Value
+    Map mapa = cursos.stream().filter(c -> c.getAlunos() > 100).collect(Collectors.toMap(c -> c.getNome(), c -> c.getAlunos()));
+    mapa.keySet().stream().forEach(System.out::println);
+    mapa.values().stream().forEach(System.out::println);
+  }
+
+  // Pega o primeiro que achar
+  private static void findAny() {
+    List<Curso> cursos = getCursos();
+    Optional<Curso> optional = cursos.stream().filter(c -> c.getAlunos() > 100).findAny();
+
+    // Se não trouxe nada da erro
+    // Curso curso = optional.get();
+
+    // Melhor usar esse - se não tem nada coloca null
+    // Curso curso = optional.orElse(null);
+
+    // Pode usar assim
+    /*
+    if (curso != null) {
+      System.out.println(curso.getNome());
+    }*/
+
+    // Ou assim - Mais top
+    optional.ifPresent(c -> System.out.println(c.getNome()));
+
+    //Ou tudo junto tb
+    cursos.stream().filter(c -> c.getAlunos() > 100).findAny().ifPresent(c -> System.out.println(c.getNome()));
+  }
+
+  private static List<Curso> getCursos() {
     List<Curso> cursos = new ArrayList<Curso>();
     cursos.add(new Curso("Python", 45));
     cursos.add(new Curso("JavaScript", 150));
     cursos.add(new Curso("Java 8", 113));
     cursos.add(new Curso("C", 55));
+    return cursos;
+  }
+
+  private static void ordernarListas() {
+    List<Curso> cursos = getCursos();
 
     //cursos.sort(Comparator.comparingInt(c -> c.getAlunos()));
     //cursos.sort(Comparator.comparingInt(Curso::getAlunos));
@@ -47,12 +96,14 @@ public class Treinando {
     cursos.stream().filter(c -> c.getAlunos() > 100).map(Curso::getAlunos).forEach(System.out::println);
 
     System.out.println("************************************************************************");
-    int soma = cursos.stream().filter(c -> c.getAlunos() > 100).mapToInt(Curso::getAlunos).sum();
-    System.out.println(soma);
+    System.out.println(cursos.stream().filter(c -> c.getAlunos() > 100).mapToInt(Curso::getAlunos).sum());
 
     System.out.println("************************************************************************");
     Stream<String> nomes = cursos.stream().map(Curso::getNome);
     nomes.forEach(System.out::println);
+
+    System.out.println("************************************************************************");
+    System.out.println("Média de alunos: " + cursos.stream().mapToInt(Curso::getAlunos).average().getAsDouble());
   }
 
   private static void orderByLength() {
