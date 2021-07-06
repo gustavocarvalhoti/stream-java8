@@ -1,0 +1,9 @@
+**********************************************************************************************************************************
+#Métodos default - A grande vantagem é que agora uma interface pode evoluir sem quebrar compatibilidade.
+
+**********************************************************************************************************************************
+#Dica
+Dada essa premissa, podemos pedir para que nosso stream seja processado em paralelo.
+Ele mesmo vai decidir quantas threads usar e fazer todo o trabalho,
+utilizando APIs mais complicadas (como a de fork join) para ganhar performance.
+Para fazer isso, basta utilizar parallelStream() em vez de stream()!
