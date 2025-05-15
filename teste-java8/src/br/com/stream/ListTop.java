@@ -1,5 +1,7 @@
 package br.com.stream;
 
+import br.com.stream.model.Pessoa;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,9 +15,9 @@ public class ListTop {
                 new Pessoa("Gustavo", 18),
                 new Pessoa("Angela", 30)
         );
-        listaPessoas.stream().forEach(p -> System.out.println(p.getNome()));
+        listaPessoas.forEach(p -> System.out.println(p.getNome()));
 
         List<Integer> listaInteger = Arrays.asList(1, 2, 3);
-        listaInteger.stream().forEach(l -> System.out.println(l));
+        listaInteger.forEach(System.out::println);
     }
 }

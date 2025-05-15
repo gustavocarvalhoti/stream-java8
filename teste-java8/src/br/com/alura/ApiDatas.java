@@ -1,69 +1,85 @@
 package br.com.alura;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.Month;
-import java.time.Period;
-import java.time.YearMonth;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 
 public class ApiDatas {
 
-  public static void main(String[] args) {
-    ex01();
-  }
+    public static void main(String[] args) {
+        ex01();
+        //compararHoras();
+    }
 
-  private static void ex01() {
-    System.out.println("***********************************************************************");
-    LocalDate hoje = LocalDate.now();
-    System.out.println(hoje);
+    private static void ex01() {
+        // Data atual - 2025-05-14
+        LocalDate hoje = LocalDate.now();
+        System.out.println(hoje);
 
-    System.out.println("***********************************************************************");
-    // Calcula a diferença entre as duas datas
-    LocalDate olimpiadasRio = LocalDate.of(2016, Month.JUNE, 5);
-    int difDatas = hoje.getYear() - olimpiadasRio.getYear();
-    System.out.println(difDatas + " anos");
+        // Calcula a diferença entre as duas datas - 2026-06-05
+        LocalDate olimpiadasRio = LocalDate.of(2026, Month.JUNE, 15);
+        int difDatas = olimpiadasRio.getYear() - hoje.getYear();
+        System.out.println("Falta " + difDatas + " ano(s) para a Olimpiada.");
 
-    System.out.println("***********************************************************************");
-    //Resposta - P-2Y-17D - 2 anos e 17 dias
-    Period periodo = Period.between(olimpiadasRio, hoje);
-    System.out.println(periodo);
-    System.out.println("Anos: " + periodo.getYears());
-    System.out.println("Meses: " + periodo.getMonths());
-    System.out.println("Dias: " + periodo.getDays());
+        // Calcula a diferença de duas datas
+        Period periodo = Period.between(hoje, olimpiadasRio);
+        System.out.println("Periodo: " + periodo);
+        System.out.println(
+                "Falta "
+                        + periodo.getYears() + " ano(s) "
+                        + periodo.getMonths() + " meses(s) e "
+                        + periodo.getDays() + " dia(s) para a Olimpiada."
+        );
 
-    System.out.println("***********************************************************************");
-    System.out.println(hoje.minusYears(1));
-    System.out.println(hoje.minusMonths(1));
-    System.out.println(hoje.minusDays(1));
-    System.out.println(hoje.plusYears(1));
-    System.out.println(hoje.plusMonths(1));
-    System.out.println(hoje.plusDays(1));
+        // Alterando a data 2025-05-14 Minus: remove, Plus: add
+        System.out.println(hoje + " -1 ano > " + hoje.minusYears(1));
+        System.out.println(hoje + " -1 mês > " + hoje.minusMonths(1));
+        System.out.println(hoje + " -1 dia > " + hoje.minusDays(1));
+        System.out.println(hoje + " +1 ano > " + hoje.plusYears(1));
+        System.out.println(hoje + " +1 mês > " + hoje.plusMonths(1));
+        System.out.println(hoje + " +1 dia > " + hoje.plusDays(1));
 
-    // Incremento
-    // Da mesma forma que as novas API's, como o Stream, os métodos da API de datas sempre vão retornar uma nova instancia da sua data
-    LocalDate proximasOlimpiadas = olimpiadasRio.plusYears(4);
-    System.out.println(proximasOlimpiadas);
+        // Imprimir no formato String - localDateToString - 2026-06-05
+        DateTimeFormatter localDateToString = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        System.out.println(olimpiadasRio.format(localDateToString));
 
-    System.out.println("***********************************************************************");
-    DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    String valorFormatado = proximasOlimpiadas.format(formatador);
-    System.out.println(valorFormatado);
+        // Imprimir no formato String - localDateTimeToString
+        // Data como minutos - 14/05/2025 23:07:28 (HH CASE para pegar no formato 24h)
+        DateTimeFormatter localDateTimeToString = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime agora = LocalDateTime.now();
+        System.out.println(agora.format(localDateTimeToString));
 
-    System.out.println("***********************************************************************");
-    System.out.println("Medidas de tempo");
-    DateTimeFormatter formatadorComHoras = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss");
-    LocalDateTime agora = LocalDateTime.now();
-    System.out.println(agora.format(formatadorComHoras));
+        // Ano-mes - 2015-02
+        YearMonth anoEMes1 = YearMonth.of(2015, Month.JANUARY);
+        YearMonth anoEMes2 = YearMonth.of(2015, Month.FEBRUARY);
+        if (anoEMes1.isBefore(anoEMes2)) {
+            System.out.println(anoEMes2 + " vem depois de " + anoEMes1);
+        }
 
-    System.out.println("***********************************************************************");
-    System.out.println("Modelos mais específicos");
-    // Ano-mes
-    YearMonth anoEMes = YearMonth.of(2015, Month.JANUARY);
-    System.out.println(anoEMes);
-    // Hora
-    LocalTime intervalo = LocalTime.of(12, 30);
-    System.out.println(intervalo);
-  }
+        // Hora - 12:30
+        LocalTime hora1 = LocalTime.of(12, 30);
+        LocalTime hora2 = LocalTime.of(14, 30);
+        if (hora2.isAfter(hora1)) {
+            System.out.println(hora1 + " vem antes de " + hora2);
+        }
+    }
+
+    private static void compararHoras() {
+        // Retorne indicando se os intervalos se sobrepõem.
+        // Test1: [10:00, 11:00) e [10:30, 11:30)  → sobrepõem
+        // Test2: [10:00, 11:00) e [11:30, 12:30)  → não sobrepõem
+
+        LocalTime hora1 = LocalTime.of(10, 00);
+        LocalTime hora2 = LocalTime.of(11, 00);
+        LocalTime hora3 = LocalTime.of(10, 30);
+        LocalTime hora4 = LocalTime.of(11, 30);
+
+        // Before = Antes
+        // After  = Depois
+        if (hora3.isBefore(hora2) || hora4.isBefore(hora2)) {
+            System.out.println("sobrepõem");
+        } else {
+            System.out.println("não sobrepõem");
+        }
+    }
+
 }
