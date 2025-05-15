@@ -1,4 +1,4 @@
-package br.com.alura;
+package br.com.stream;
 
 import java.util.function.Consumer;
 

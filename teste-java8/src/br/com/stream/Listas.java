@@ -7,6 +7,10 @@ import java.util.*;
 public class Listas {
 
     public static void main(String[] args) {
+        ex01();
+    }
+
+    private static void ex01() {
         Pessoa p1 = new Pessoa("P1: Gustavo", 36);
         Pessoa p2 = new Pessoa("P2: Duda", 10);
         Pessoa p3 = new Pessoa("P3: Davi", 7);
@@ -71,6 +75,22 @@ public class Listas {
         sortedMapIntPessoa.put(2, p2);
         sortedMapIntPessoa.put(1, p1);
         System.out.println(sortedMapIntPessoa);
+    }
+
+    private static void ex02() {
+        List<Pessoa> listaPessoas = Arrays.asList(
+                new Pessoa("Joao", 32),
+                new Pessoa("Antonio", 20),
+                new Pessoa("Maria", 18),
+                new Pessoa("Gustavo", 18),
+                new Pessoa("Angela", 30)
+        );
+        // Imprime o nome das pessoas
+        listaPessoas.forEach(p -> System.out.println(p.getNome()));
+
+        // Imprime os valores da lista
+        List<Integer> listaInteger = Arrays.asList(1, 2, 3);
+        listaInteger.forEach(System.out::println);
     }
 
 }

@@ -1,13 +1,13 @@
-package br.com.alura;
+package br.com.stream;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
-public class ApiDatas {
+public class Datas {
 
     public static void main(String[] args) {
         ex01();
-        //compararHoras();
+        compararHoras();
     }
 
     private static void ex01() {
@@ -76,9 +76,9 @@ public class ApiDatas {
         // Before = Antes
         // After  = Depois
         if (hora3.isBefore(hora2) || hora4.isBefore(hora2)) {
-            System.out.println("sobrepõem");
+            System.out.println("Sobrepõem");
         } else {
-            System.out.println("não sobrepõem");
+            System.out.println("Não sobrepõem");
         }
     }
 

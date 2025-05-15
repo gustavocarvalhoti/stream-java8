@@ -1,4 +1,4 @@
-package br.com.alura.comparator;
+package br.com.stream.comparator;
 
 import java.util.Comparator;
 

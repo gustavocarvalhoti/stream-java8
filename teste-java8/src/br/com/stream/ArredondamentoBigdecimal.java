@@ -3,7 +3,7 @@ package br.com.stream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class TestBigdecimal {
+public class ArredondamentoBigdecimal {
 
     public static void main(String[] args) {
         arredondamento();

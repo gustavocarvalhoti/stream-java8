@@ -1,4 +1,4 @@
-package br.com.alura.pojo;
+package br.com.stream.model;
 
 public class Curso {
 
