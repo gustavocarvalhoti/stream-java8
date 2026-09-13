@@ -2,7 +2,7 @@ package br.com.stream;
 
 import java.util.Arrays;
 
-public class Exercicios {
+public class ExercicioMultiplos3BuzzFizz {
 
     public static void main(String[] args) {
         verifyArrayContainsSum();
@@ -28,7 +28,6 @@ public class Exercicios {
             }
         }
     }
-
 
     private static void multiplos3e5() {
         /*

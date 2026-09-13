@@ -13,21 +13,21 @@ public class Datas {
     private static void ex01() {
         // Data atual - 2025-05-14
         LocalDate hoje = LocalDate.now();
-        System.out.println(hoje);
+        System.out.println("\nHoje: " + hoje);
 
         // Calcula a diferença entre as duas datas - 2026-06-05
-        LocalDate olimpiadasRio = LocalDate.of(2026, Month.JUNE, 15);
+        LocalDate olimpiadasRio = LocalDate.of(2030, Month.JUNE, 15);
         int difDatas = olimpiadasRio.getYear() - hoje.getYear();
-        System.out.println("Falta " + difDatas + " ano(s) para a Olimpiada.");
+        System.out.println("Falta para a Olimpiada: " + difDatas + " ano(s)\n");
 
         // Calcula a diferença de duas datas
         Period periodo = Period.between(hoje, olimpiadasRio);
-        System.out.println("Periodo: " + periodo);
+        System.out.println("Periodo ID: " + periodo);
         System.out.println(
-                "Falta "
-                        + periodo.getYears() + " ano(s) "
-                        + periodo.getMonths() + " meses(s) e "
-                        + periodo.getDays() + " dia(s) para a Olimpiada."
+                "Falta:\n"
+                        + periodo.getYears() + " ano(s)\n"
+                        + periodo.getMonths() + " meses(s)\n"
+                        + periodo.getDays() + " dia(s) para a Olimpiada de acordo com o periodo acima\n"
         );
 
         // Alterando a data 2025-05-14 Minus: remove, Plus: add

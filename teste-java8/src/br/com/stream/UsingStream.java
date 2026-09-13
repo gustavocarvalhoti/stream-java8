@@ -42,7 +42,7 @@ public class UsingStream {
     }
 
     // Cria um map to int e soma os valores
-    public static void ex01() {
+    public static void exMapIntSum() {
         Stream<Pessoa> streamPessoas = listaPessoas.stream();
         int sum = streamPessoas
                 .filter(p -> p.getNome().startsWith("A"))
@@ -51,9 +51,8 @@ public class UsingStream {
         System.out.println("Soma da idade das pessoas que o nome começa com A: " + sum);
     }
 
-    // Descobre o maximo
-    // Descobre o minimo
-    private static void ex02() {
+    // Descobre o maximo e minimo
+    private static void exMaxMin() {
         int maiorIdadde = listaPessoas.stream()
                 .mapToInt(Pessoa::getIdade)
                 .max()
@@ -69,7 +68,7 @@ public class UsingStream {
     }
 
     // Soma, Max e Min
-    private static void ex03() {
+    private static void exSumMaxMin() {
         IntSummaryStatistics intSummStat = listaPessoas
                 .stream()
                 //.filter(p -> p.getNome().startsWith("A"))
@@ -82,7 +81,7 @@ public class UsingStream {
     }
 
     // Media
-    private static void ex04() {
+    private static void exAverage() {
         double average = listaPessoas
                 .stream()
                 .mapToInt(Pessoa::getIdade)
@@ -94,7 +93,7 @@ public class UsingStream {
 
     // Filtra as pessoas que o nome começã com A
     // Da o exemplo de Set, pode utilizar list tb
-    private static void ex05() {
+    private static void exFilter() {
         List<Pessoa> listPessoasFiltrada = listaPessoas
                 .stream()
                 .filter(p -> p.getNome().startsWith("A"))
@@ -115,7 +114,7 @@ public class UsingStream {
     }
 
     // Agrupa as pessoas por idade
-    private static void ex06() {
+    private static void exGroupByIdade() {
         Map<Integer, List<Pessoa>> map = listaPessoas
                 .stream()
                 .collect(Collectors.groupingBy(Pessoa::getIdade));
@@ -126,7 +125,7 @@ public class UsingStream {
 
     // Pessoa maior de 18
     // Verifica e pega a primeira
-    private static void ex07() {
+    private static void exGetFirst() {
         var optPessoa = listaPessoas
                 .stream()
                 .filter(p -> p.getIdade() > 20)
@@ -159,14 +158,6 @@ public class UsingStream {
 
         int[] listFiltered = Arrays.stream(listFull).filter(n -> n % 2 != 0).toArray();
         Arrays.stream(listFiltered).forEach(System.out::println);
-    }
-
-    // Arredondamento para cima
-    private static void arredondamento() {
-        double d = 12.548795;
-        // RoundingMode.HALF_EVEN -> Arredonda para cima
-        BigDecimal bd = new BigDecimal(d).setScale(3, RoundingMode.HALF_EVEN);
-        System.out.println(bd.doubleValue());
     }
 
 }

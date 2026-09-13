@@ -15,8 +15,12 @@ public class InputBufferedReader {
         Scanner input = new Scanner(System.in);
         Scanner inputText = new Scanner(System.in);
 
+        System.out.println("================================");
+        System.out.println("Digite um numero inteiro: ");
         int i = input.nextInt();
+        System.out.println("Digite um numero double: ");
         double d = input.nextDouble();
+        System.out.println("Digite uma String: ");
         String s = inputText.nextLine();
 
         System.out.println("String: " + s);
@@ -26,7 +30,6 @@ public class InputBufferedReader {
 
     private static void exercise02() {
         System.out.println("================================");
-
         Scanner input = new Scanner(System.in);
 
         var value = input.nextLine();

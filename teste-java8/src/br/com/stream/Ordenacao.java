@@ -19,7 +19,6 @@ public class Ordenacao {
         ordernarListas();
         orderArrayInteiro();
         orderByLength(Arrays.asList("Gustavo", "Michelle", "Duda", "Ana Maria Regina"));
-        orderByLength();
         imprimeNaLinhaAcepted();
     }
 
@@ -27,82 +26,77 @@ public class Ordenacao {
         List<Curso> cursos = new ArrayList<Curso>();
         cursos.add(new Curso("Python", 45));
         cursos.add(new Curso("JavaScript", 150));
-        cursos.add(new Curso("Java 8", 113));
+        cursos.add(new Curso("Java 25", 113));
         cursos.add(new Curso("C", 55));
         return cursos;
     }
 
-    private static void orderByLength(List<String> palavras) {
-        System.out.println("INPUT:.");
-        palavras.forEach(System.out::println);
+    private static void orderByLength(List<String> nomes) {
+        System.out.println("\nNomes 01: ");
+        nomes.forEach(System.out::println);
 
         // Ordena por length com lambda function do menor para o maior
-        //palavras.sort((s1, s2) -> Integer.compare(s1.length(), s2.length()));
-        palavras.sort(comparingInt(String::length));
+        //nomes.sort((s1, s2) -> Integer.compare(s1.length(), s2.length()));
+        nomes.sort(comparingInt(String::length));
+        System.out.println("\nNomes 02: ");
+        nomes.forEach(System.out::println);
+
         // Ordena por length com lambda function do maior para o menor
-        palavras.sort((s1, s2) -> s2.length() - s1.length());
+        nomes.sort((s1, s2) -> s2.length() - s1.length());
+        System.out.println("\nNomes 03: ");
+        nomes.forEach(System.out::println);
 
         // Antes do Java8 (Não utilizar esse)
         // Ordena por length com lambda function do menor para o maior
         ComparatorStringLength comparador = new ComparatorStringLength();
-        Collections.sort(palavras, comparador);
-
-        System.out.println("\nOUTPUT:.");
-        palavras.forEach(System.out::println);
-    }
-
-    private static void orderByLength() {
-        List<String> palavras = Arrays.asList("alura123456789", "caelum", "alura1", "Z", "yz", "wxy");
-
-        // Não utilizar esse
-        //Comparator<String> comparador = Comparator.comparing(String::length);
-        //palavras.sort(comparador);
+        Collections.sort(nomes, comparador);
+        System.out.println("\nNomes 04: ");
+        nomes.forEach(System.out::println);
 
         // Top - Method reference - Ordena do menor para o maior
-        //palavras.sort(Comparator.comparing(String::length));
-        palavras.sort(comparing(String::length));
+        //cursos.sort(Comparator.comparing(String::length));
+        nomes.sort(comparing(String::length));
+        System.out.println("\nNomes 05: ");
+        nomes.forEach(System.out::println);
 
-        // Lambda implicito - Method reference
-        palavras.forEach(System.out::println);
-        System.out.println("*******************************");
+        // Lambda implicito - Method reference - Menor para maior
+        nomes.forEach(System.out::println);
+        System.out.println("\nNomes 06: ");
+        nomes.forEach(System.out::println);
 
         // Imprime a primeira letra
-        palavras.forEach(s -> System.out.println(s.substring(0, 1)));
-        System.out.println("*******************************");
+        nomes.forEach(s -> System.out.println(s.substring(0, 1)));
+        System.out.println("\nNomes 07: ");
+        nomes.forEach(System.out::println);
 
         // Ordem alfabética
-        palavras.sort(String.CASE_INSENSITIVE_ORDER);
-        palavras.forEach(System.out::println);
+        nomes.sort(String.CASE_INSENSITIVE_ORDER);
+        System.out.println("\nNomes 08: ");
+        nomes.forEach(System.out::println);
     }
 
     private static void ordernarListas() {
+        // Ordena por numero de alunos
         List<Curso> cursos = getCursos();
-
+        cursos.sort(comparingInt(Curso::getAlunos));
         //cursos.sort(Comparator.comparingInt(c -> c.getAlunos()));
         //cursos.sort(Comparator.comparingInt(Curso::getAlunos));
-        cursos.sort(comparingInt(Curso::getAlunos));
 
+        // Filtra por cursos com mais de 100 alunos
         System.out.println("************************************************************************");
         Stream<Curso> streamDeCurso = cursos.stream().filter(c -> c.getAlunos() > 100);
-        streamDeCurso.forEach(c -> System.out.println(c.getAlunos()));
+        streamDeCurso.forEach(c -> System.out.println(c.getNome() + " - " + c.getAlunos() + " alunos."));
 
+        // Filtra por cursos com mais de 100 alunos e soma os alunos
         System.out.println("************************************************************************");
-        // Imprime o numero de alunos
-        //cursos.stream().filter(c -> c.getAlunos() > 100).map(c -> c.getAlunos()).forEach(x -> System.out.println(x));
-        //cursos.stream().filter(c -> c.getAlunos() > 100).map(c -> c.getAlunos()).forEach(System.out::println);
-        //cursos.stream().filter(c -> c.getAlunos() > 100).map(Curso::getAlunos).forEach(System.out::println);
-        // N]ao funciona para o filter
-        cursos.stream().filter(c -> c.getAlunos() > 100).map(Curso::getAlunos).forEach(System.out::println);
-
-        System.out.println("************************************************************************");
+        System.out.print("Total de alunos: ");
         System.out.println(cursos.stream().filter(c -> c.getAlunos() > 100).mapToInt(Curso::getAlunos).sum());
 
         System.out.println("************************************************************************");
-        Stream<String> nomes = cursos.stream().map(Curso::getNome);
-        nomes.forEach(System.out::println);
-
-        System.out.println("************************************************************************");
-        System.out.println("Média de alunos: " + cursos.stream().mapToInt(Curso::getAlunos).average().getAsDouble());
+        cursos.forEach(c -> System.out.print(c.getAlunos() + " "));
+        double media = cursos.stream().mapToInt(Curso::getAlunos).average().getAsDouble();
+        System.out.print("/ " + cursos.size() + " = " + media + "\n");
+        System.out.println("Média de alunos por cursos: " + (int) media);
     }
 
     // Ordenar lista de inteiros crescente
